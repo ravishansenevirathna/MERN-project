@@ -1,19 +1,22 @@
 const express = require("express");
-const app = express();
-const cors = require('cors');
-
-const port = 8070;
-const host = '127.0.0.1';
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const app = express();
+require('dotenv').config();
+
+
+const PORT = process.env.PORT || 8070;
 
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-const uri = 'mongodb+srv://trrsenevirathna2001:2001@myclusterforstu.ghfrsxj.mongodb.net/?retryWrites=true&w=majority&appName=MyClusterForStu'
+const URL = process.env.MONGODB_URL;
 
 const connect = async () =>{
     try{
-        await mongoose.connect(uri);
+        await mongoose.connect(URL);
         console.log('Connected to mongodb')
     }
     catch(error){
@@ -25,6 +28,13 @@ const connect = async () =>{
 connect();
 
 
-const server = app.listen(port,host,() => {
-    console.log(`node server is listening to ${server.address().port}`)
+
+
+const server = app.listen(PORT, () => {
+    console.log(`node server is listening to port number :  ${PORT}`)
 })
+
+
+const studentRouter = require('./routes/StudentsRoutes');
+
+app.use("/student",studentRouter);
