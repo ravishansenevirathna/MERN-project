@@ -88,8 +88,8 @@ router.route("/findStudent/:id").get(async(req,res)=> {
     let userId = req.params.id;
 
     const foundStudent = await Student.findById(userId)
-    .then(() => {
-        res.status(200).send({status: "User found",foundStudent });
+    .then((user) => {
+        res.status(200).send({status: "User found",user});
     }).catch((err) => {
         console.log(err);
         res.status(500).send({status: "Error with finding user", error: err.message});

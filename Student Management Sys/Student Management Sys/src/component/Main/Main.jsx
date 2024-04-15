@@ -21,7 +21,6 @@ import MailIcon from '@mui/icons-material/Mail';
 import Button from "@mui/material/Button";
 import routes from "../../comman/navigation/routes.jsx";
 import {Routes,Route,Link,Navigate} from "react-router-dom";
-import Swal from "sweetalert2";
 
 const drawerWidth = 240;
 
